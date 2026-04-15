@@ -36,17 +36,26 @@ class Conta:
         return self._saldo
 
     def sacar(self, valor): 
+        # Aplicando "Early Return" # (Retorno Antecipado)
+        # O 'else' é indispensável por causa deste conceito: se o IF for verdadeiro, 
+        # o 'return' encerra a função, tornando o 'else' redundante e o código mais limpo.
         if valor > 0 and valor <= self._saldo:
             self._saldo -= valor
             print("\n=== Saque realizado! ===")
-            return True
+            return True # Mata a função aqui se der certo
+        
+        # Se chegou aqui, é porque o IF falhou.
+        print("\n!!! Erro: Saldo insuficiente ou valor inválido !!!")
         return False
 
     def depositar(self, valor):
         if valor > 0:
             self._saldo += valor
             print("\n=== Depósito realizado! ===")
-            return True
+            return True # Mata a função aqui se der certo
+        
+        # Se o valor for 0 ou negativo, o IF é pulado e ele cai aqui:
+        print("\n!!! Erro: Valor inválido. Realize novamente a transação !!!")
         return False
 
 class Historico:
